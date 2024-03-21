@@ -1,13 +1,20 @@
 from flask import Flask, request, send_file, jsonify
 import json
-import db
+import db1 as db1
 import datetime
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
+CORS(app)
+db1.setup()
 
 @app.route('/')
 def home():
-    return send_file("static/index.html")
+    return send_file("static/home.html")
+ 
+@app.route('/form')
+def add_car_form():
+    return send_file("static/form.html")
 
 @app.route('/api/cars', methods=['POST'])
 def add_car():
@@ -23,7 +30,7 @@ def add_car():
       if km.isdigit() is False or phone.isdigit() is False or car_number.isdigit() is False:
          return json.dumps({'error': 'input validation fields failed: km, phone, car_number'}), 400, {'Content-Type':'application/json'}
       sql=f"INSERT INTO cars (CreationDate,Name,CarNumber,KM,Phone,Description) VALUES ('{datetime.datetime.now()}','{name}', '{car_number}', {km}, '{phone}', '{description}')"
-      db.query(sql)
+      db1.query(sql)
       return {}, 201
     except Exception as ex: 
       error={
@@ -60,7 +67,7 @@ class Car:
 def get_cars():
     try:
       sql="SELECT * FROM cars"
-      res=db.query(sql)
+      res=db1.query(sql)
       arr=[]
       for tpl in res:
          car=Car(*tpl)
