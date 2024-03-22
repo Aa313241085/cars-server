@@ -142,9 +142,3 @@
 .dropdown:hover .dropdown-content {
   display: block;
 }
-
-img{
-  width:80px;
-  height:80px;
-  float:right;
-}
