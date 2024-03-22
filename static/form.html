@@ -3,36 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Opening a service call</h1>
+    </title>
     <link rel="stylesheet" href="/static/style.css">
     <script src="/static/cars.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.8/axios.min.js"></script>
 </head>
+<div class="navbar">
+  <a href="/">Home</a>
+  <a href="/form">Create Form</a>
+  <img src="static/logo.png" alt="">
+</div>
 <body>
+  <h1>Opening a service call:</h1>
     <div class="container">
       <form id="form">
       <div class="row">
         <div class="col-25">
-          <label for="name">Full Name</label>
+          <label for="name">Full Name:</label>
         </div>
         <div class="col-75">
-          <input type="text" id="name" name="name" placeholder="Your name..">
+          <input type="text" id="name" name="name" placeholder="* Full Name">
         </div>
       </div>
       <div class="row">
         <div class="col-25">
-          <label for="car_number">Car number</label>
+          <label for="car_number">Car Number:</label>
         </div>
         <div class="col-75">
-          <input type="text" id="car_number" name="car_number" placeholder="Car number..">
+          <input type="text" id="car_number" name="car_number" placeholder="* Car Number">
         </div>
       </div>
       <div class="row">
         <div class="col-25">
-          <label for="km">KM</label>
+          <label for="km">KM:</label>
         </div>
         <div class="col-75">
-          <input type="text" id="km" name="km" placeholder="KM..">
+          <input type="text" id="km" name="km" placeholder="* KM">
         </div>
       </div>
       <div class="row">
@@ -40,7 +47,7 @@
           <label for="phone">Phone</label>
         </div>
         <div class="col-75">
-          <input type="text" id="phone" name="phone" placeholder="Phone..">
+          <input type="text" id="phone" name="phone" placeholder="* Phone">
         </div>
       </div>
       <div class="row">
@@ -48,12 +55,12 @@
           <label for="description">Description</label>
         </div>
         <div class="col-75">
-          <input type="text" id="description" name="description" placeholder="Description..">
+          <input type="text" id="description" name="description" placeholder="* Description">
         </div>
       </div>
       <br>
       <div class="row">
-        <input type="button" onclick="post()" value="Submit">
+        <input type="button" onclick="post()" value="Create Form" style="background-color: black; color:white; border-radius: 5px; padding: 10px;text-align: left;">
       </div>
       </form>
       <div id="msg"></div>
