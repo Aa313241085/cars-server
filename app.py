@@ -2,7 +2,7 @@ from flask import Flask, request, send_file, jsonify
 import json
 import db1 as db1
 import datetime
-from flask_cors import CORS, cross_origin
+from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)
@@ -26,9 +26,9 @@ def add_car():
       description=data.get('description', None)
       car_number=data.get('car_number', None)
       if name is None or km is None or phone is None or description is None or car_number is None:
-         return json.dumps({'error': 'missing required fields: name, km, phone, description, car_number'}), 400, {'Content-Type':'application/json'}
+         return json.dumps({'error': 'Missing required fields: Name, KM, Phone, Description, Car Number'}), 400, {'Content-Type':'application/json'}
       if km.isdigit() is False or phone.isdigit() is False or car_number.isdigit() is False:
-         return json.dumps({'error': 'input validation fields failed: km, phone, car_number'}), 400, {'Content-Type':'application/json'}
+         return json.dumps({'error': 'Input validation fields failed: KM, Phone, Car Number'}), 400, {'Content-Type':'application/json'}
       sql=f"INSERT INTO cars (CreationDate,Name,CarNumber,KM,Phone,Description) VALUES ('{datetime.datetime.now()}','{name}', '{car_number}', {km}, '{phone}', '{description}')"
       db1.query(sql)
       return {}, 201
@@ -79,10 +79,24 @@ def get_cars():
          "message": str(ex)
       }}
       return json.dumps(error), 500, {'Content-Type':'application/json'}
-    
+   
+@app.route('/api/cars/<id>', methods=['DELETE'])
+def delete_car(id):
+    try:
+      sql=f"SELECT * FROM cars WHERE Id={id}"
+      res=db1.query(sql)
+      if len(res) == 0:
+         return json.dumps({'error': f'Id {id} does not exist'}), 404, {'Content-Type':'application/json'}
+      sql=f"DELETE FROM cars WHERE Id={id}"
+      res=db1.query(sql)
+      return jsonify('') , 204, {'Content-Type':'application/json'}
+    except Exception as ex: 
+      error={
+      "error": {
+         "message": str(ex)
+      }}
+      return json.dumps(error), 500, {'Content-Type':'application/json'}
 
+ 
 if __name__ == '__main__':
       app.run(debug=True)
-    
-
-    

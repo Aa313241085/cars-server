@@ -43,6 +43,4 @@ def test_add_car():
         "description": "test"
     }
     response = requests.post(url=TEST_URL, json=obj)
-    assert response.status_code == 201
-  
-      
+    assert response.status_code == 201      

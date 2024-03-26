@@ -15,4 +15,3 @@ def query(sql):
 
 def setup():
       query("CREATE TABLE IF NOT EXISTS cars (Id INTEGER, CreationDate DATETIME, Name TEXT, CarNumber TEXT, KM bigint, Phone TEXT, Description TEXT, PRIMARY KEY(Id AUTOINCREMENT))")
-

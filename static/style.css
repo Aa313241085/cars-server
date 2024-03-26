@@ -56,6 +56,11 @@
 
 }
 
+.pointer {
+  color: red;
+  cursor: pointer;
+}
+
 
 .navbar {
   overflow: hidden;
